@@ -41,14 +41,14 @@ namespace _2019_Fall_Assignment2
             Console.Write("\n");
 
             string s = "abca";
-            if (isaPalindrome(s) == 0)
+            if (isaPalindrome(s) == 0)// first checks if input is a pallindrome
             {
                 Console.Write("\nInput "+s+" is a palindrome");
 
             }
             else
             {
-                if (ValidPalindrome(s))
+                if (ValidPalindrome(s))// checks if input can be made a pallindrome by removing any one character
                 {
                     Console.WriteLine("The given string \"{0}\" can be made PALINDROME", s);
                 }
