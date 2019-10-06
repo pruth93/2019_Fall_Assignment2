@@ -238,7 +238,7 @@ namespace _2019_Fall_Assignment2
             else
             return false;//return true(string can't be made palindrome)
 }
- //method to check if a string is a palindrome
+        //method to check if a string is a palindrome
        public static int isaPalindrome(string s)
         {
             int ispal = 0;
@@ -252,7 +252,7 @@ namespace _2019_Fall_Assignment2
                 }
                 else// if characters don't match assign 1 to ispal
                 {
-                    ispal = 1;
+                    ispal = 1;// ispal  is one if not a palindrome
                     break;
                 }
             }  
