@@ -139,20 +139,55 @@ namespace _2019_Fall_Assignment2
 
             return new int[,] { };
         }
-
+        //Function to calculate minimum meeting rooms needed based on meeting intervals
         public static int MinMeetingRooms(int[,] intervals)
         {
             try
-            {
-                // Write your code here
-            }
-            catch
-            {
-                Console.WriteLine("Exception occured while computing MinMeetingRooms()");
-            }
+            { 
+                int[] startTimes = new int[intervals.GetLength(0)];//array to store start time of each meeting
+                int[] endTimes = new int[intervals.GetLength(0)];  //array to store end time of each meeting
+                int roomsNeeded = 1;             //roomsNeeded= Minimum number of meering rooms required(always atleast one)
+                int temp_roomsNeeded = 1;   //temporary variable used
+                int k = 0;
+                for (int i = 0; i < intervals.GetLength(0); i++)//divide intervals into 2 arrays containing times and end times respectively
+                {
+                        startTimes[k] = intervals[i,0]; //adding start times to array
+                        endTimes[k] = intervals[i,1]; //adding end times to array
+                        k++;
+                }
+                
+                Array.Sort(startTimes);// sort start times
+                Array.Sort(endTimes);// sort end times
+                int x = 1, y = 0;//start with start time of second meeting
+                while(x< intervals.GetLength(0) && y< intervals.GetLength(0))
+                {
+                    if (startTimes[x]<=endTimes[y])//check if start time of a meeting  less than end time of another
+                    {
+                        temp_roomsNeeded++; //increment the number of rooms needed
+                        x++;
+                        if(temp_roomsNeeded> roomsNeeded)
+                        {
+                            roomsNeeded = temp_roomsNeeded;//assign temp value to final value of meeting rooms
+                        }
+                                         }
 
-            return 0;
-        }
+                    else
+                    {
+                        temp_roomsNeeded--;// if meeting starts after another meeting ends no meeting room required
+                        y++;
+                    }
+                }
+                
+                return roomsNeeded;// return the minimum number of rooms needed
+            }
+    catch
+    {
+        Console.WriteLine("Exception occured while computing MinMeetingRooms()");
+    }
+
+    return 0;
+}
+
 
         public static int[] SortedSquares(int[] A)
         {
