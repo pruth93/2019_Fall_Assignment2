@@ -41,6 +41,7 @@ namespace _2019_Fall_Assignment2
             Console.Write("\n");
 
             string s = "abca";
+            // had to update this to accomodate the possibility that string is already a pallindrome
             if (isaPalindrome(s) == 0)// first checks if input is a pallindrome
             {
                 Console.Write("\nInput "+s+" is a palindrome");
