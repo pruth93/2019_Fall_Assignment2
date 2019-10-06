@@ -5,7 +5,7 @@ namespace _2019_Fall_Assignment2
     class Program
     {
         public static void Main(string[] args)
-        {
+        { //test comment
             int target = 5;
             int[] nums = { 1, 3, 5, 6 };
             Console.WriteLine("Position to insert {0} is = {1}\n", target, SearchInsert(nums, target));
