@@ -41,12 +41,21 @@ namespace _2019_Fall_Assignment2
             Console.Write("\n");
 
             string s = "abca";
-            if(ValidPalindrome(s)) {
-                Console.WriteLine("The given string \"{0}\" can be made PALINDROME", s);
+            if (isaPalindrome(s) == 0)
+            {
+                Console.Write("\nInput "+s+" is a palindrome");
+
             }
             else
             {
-                Console.WriteLine("The given string \"{0}\" CANNOT be made PALINDROME", s);
+                if (ValidPalindrome(s))
+                {
+                    Console.WriteLine("The given string \"{0}\" can be made PALINDROME", s);
+                }
+                else
+                {
+                    Console.WriteLine("The given string \"{0}\" CANNOT be made PALINDROME", s);
+                }
             }
         }
 
@@ -203,18 +212,51 @@ namespace _2019_Fall_Assignment2
             return new int[] { };
         }
 
-        public static bool ValidPalindrome(string s)
-        {
+        //method to check if we can remove a character from a string to make it a palidrome
+       public static bool ValidPalindrome(string s)
+       {
+            int flag = 0;
             try
             {
-                // Write your code here
-            }
+                  Console.Write("\nInput is not a palindrome.Lets check if we can make it one by removing a character.\n");
+                    for (int i = 0; i < s.Length; i++)//iterate through the characters of the string
+                    {
+                        string stringpart = s.Remove(i, 1);//remove a character from input string
+                        if (isaPalindrome(stringpart) == 0)//check if the string is a palindrome after a character is removed
+                        {
+                            flag=1;// flag is assigned 1 if after removing a character string becomes palindrome
+                            break;
+                        }
+                    }
+             }
             catch
+    {
+        Console.WriteLine("Exception occured while computing ValidPalindrome()");
+    }
+            if (flag==1)// check value of flag
+            return true;//return true(string can be made palindrome)
+            else
+            return false;//return true(string can't be made palindrome)
+}
+ //method to check if a string is a palindrome
+       public static int isaPalindrome(string s)
+        {
+            int ispal = 0;
+            int x = 0, y = s.Length - 1;
+            while (x < y) //itterate until mid of the string is reached 
             {
-                Console.WriteLine("Exception occured while computing ValidPalindrome()");
-            }
-
-            return false;
+                if (s[x] == s[y])// match charaters to check if string is a pallindrome
+                {
+                    x++; 
+                    y--;          
+                }
+                else// if characters don't match assign 1 to ispal
+                {
+                    ispal = 1;
+                    break;
+                }
+            }  
+            return ispal;
         }
     }
 }
