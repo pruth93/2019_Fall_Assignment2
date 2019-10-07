@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;  // added library to use Dictionary
+using System.Linq; //added Linq library to support code in Largest Unique number
 
 namespace _2019_Fall_Assignment2
 {
@@ -10,7 +11,11 @@ namespace _2019_Fall_Assignment2
             int target = 5;
             int[] nums = { 1, 3, 5, 6 };
             Console.WriteLine("Position to insert {0} is = {1}\n", target, SearchInsert(nums, target));
-
+            int result = SearchInsert(nums, target);
+            if (result != -1)
+            {
+                Console.WriteLine("Position to insert {0} is = {1}\n", target, result);
+            }
             int[] nums1 = { 1, 2, 2, 1 };
             int[] nums2 = { 2, 2 };
             int[] intersect = Intersect(nums1, nums2);
@@ -83,17 +88,40 @@ namespace _2019_Fall_Assignment2
 
         public static int SearchInsert(int[] nums, int target)
         {
-            try
+            
+             try
             {
-                // Write your code here
+                int minNum = 0;
+                int maxNum = nums.Length - 1;
+
+
+                while (minNum <= maxNum)
+                {
+                    int mid = (minNum + maxNum) / 2;
+                    if (target == nums[mid])
+                    {
+                        Console.WriteLine(target + " found at position " + mid);
+                        return -1;
+                    }
+                    else if (target < nums[mid])
+                    {
+                        maxNum = mid - 1;
+                    }
+                    else
+                    {
+                        minNum = mid + 1;
+                    }
+                }
+                /*Console.Write("target not found.\n Index where the target should be inserted so that the array still " +
+                "remains sorted is " + minNum + "\n");*/
+                return minNum;
             }
             catch
             {
                 Console.WriteLine("Exception occured while computing SearchInsert()");
             }
-
             return 0;
-        }
+            }
 
         public static int[] Intersect(int[] nums1, int[] nums2)
         {
@@ -135,7 +163,34 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                try
+                {
+                   
+
+                   Dictionary<int, int> dict = new Dictionary<int, int>();
+                    int val;
+                    for (int i = 0; i < A.Length - 1; i++)
+                    {
+                        if (dict.TryGetValue(A[i], out val)) //check if the number is already present in the dictionary
+                        {
+                            dict[A[i]]++;//if the number exists, then increase the value
+                        }
+                        else
+                        {
+                            dict.Add(A[i], 0); //if it doesn't exist then add it to the dictionary with value 0
+                        }
+                    }
+                    return dict.Where(pair => pair.Value == 0).Select(pair => pair.Key).Max();
+                    //used where clause to find if the value is 0 and Max clause to find the maximum value
+
+
+                }
+                catch
+                {
+                    Console.WriteLine("Exception occured while computing LargestUniqueNumber()");
+                }
+
+                return 0;
             }
             catch
             {
@@ -178,7 +233,25 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                try
+                {
+                    int[,] res = new int[A.GetLength(0), A.GetLength(1)];// create a result 2D array of size same as A
+                    for (int i = 0; i < A.GetLength(0); i++) // outer loop is used to control rows
+                    {
+                        for (int j = 0; j < A.GetLength(1); j++) // inner loop is used to control columns
+                        {
+                            res[i, j] = A[i, Math.Abs(j - A.GetLength(1) + 1)] ^ 1; //first we will reverse the array and then use XOR operator to find the inverse image of the array
+                        }
+
+                    }
+                    return res;
+                }
+                catch
+                {
+                    Console.WriteLine("Exception occured while computing FlipAndInvertImage()");
+                }
+
+                return new int[,] { };
             }
             catch
             {
