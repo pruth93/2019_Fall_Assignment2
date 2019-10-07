@@ -8,7 +8,7 @@ namespace _2019_Fall_Assignment2
     {
         public static void Main(string[] args)
         {
-            int target = 4;
+            int target = 5;
             int[] nums = { 1, 3, 5, 6 };
             int result = SearchInsert(nums, target);
             if (result != -1)
@@ -99,7 +99,7 @@ namespace _2019_Fall_Assignment2
                     int mid = (minNum + maxNum) / 2;
                     if (target == nums[mid])
                     {
-                        Console.Write(target + " found at position " + mid);
+                        Console.WriteLine(target + " found at position " + mid);
                         return -1;
                     }
                     else if (target < nums[mid])
