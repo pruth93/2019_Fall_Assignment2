@@ -10,7 +10,6 @@ namespace _2019_Fall_Assignment2
         {
             int target = 4;
             int[] nums = { 1, 3, 5, 6 };
-            Console.WriteLine("Position to insert {0} is = {1}\n", target, SearchInsert(nums, target));
             int result = SearchInsert(nums, target);
             if (result != -1)
             {
@@ -88,8 +87,8 @@ namespace _2019_Fall_Assignment2
 
         public static int SearchInsert(int[] nums, int target)
         {
-            
-             try
+
+            try
             {
                 int minNum = 0;
                 int maxNum = nums.Length - 1;
@@ -121,7 +120,7 @@ namespace _2019_Fall_Assignment2
                 Console.WriteLine("Exception occured while computing SearchInsert()");
             }
             return 0;
-            }
+        }
 
         public static int[] Intersect(int[] nums1, int[] nums2)
         {
@@ -163,34 +162,24 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                try
-                {
-                   
 
-                   Dictionary<int, int> dict = new Dictionary<int, int>();
-                    int val;
-                    for (int i = 0; i < A.Length - 1; i++)
+
+                Dictionary<int, int> dict = new Dictionary<int, int>();
+                int val;
+                for (int i = 0; i < A.Length - 1; i++)
+                {
+                    if (dict.TryGetValue(A[i], out val)) //check if the number is already present in the dictionary
                     {
-                        if (dict.TryGetValue(A[i], out val)) //check if the number is already present in the dictionary
-                        {
-                            dict[A[i]]++;//if the number exists, then increase the value
-                        }
-                        else
-                        {
-                            dict.Add(A[i], 0); //if it doesn't exist then add it to the dictionary with value 0
-                        }
+                        dict[A[i]]++;//if the number exists, then increase the value
                     }
-                    return dict.Where(pair => pair.Value == 0).Select(pair => pair.Key).Max();
-                    //used where clause to find if the value is 0 and Max clause to find the maximum value
-
-
+                    else
+                    {
+                        dict.Add(A[i], 0); //if it doesn't exist then add it to the dictionary with value 0
+                    }
                 }
-                catch
-                {
-                    Console.WriteLine("Exception occured while computing LargestUniqueNumber()");
-                }
+                return dict.Where(pair => pair.Value == 0).Select(pair => pair.Key).Max();
+                //used where clause to find if the value is 0 and Max clause to find the maximum value
 
-                return 0;
             }
             catch
             {
